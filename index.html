@@ -1,74 +1,287 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My portfolio</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hamza Elhatimy — Full Stack Developer</title>
+  <meta name="description" content="Portfolio of Hamza Elhatimy, a passionate beginner full stack developer based in Casablanca, Morocco.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 </head>
 
-<body> 
-    <header>
-        <nav>
-    <ul class="nav nav-tabs">
-    <li class="nav-item">
-        <a href="#" class="nav-link active">Home</a>
-    </li>
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Services</a>
-        <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">CS 1</a><br>
-            <a class="dropdown-item" href="#">CS 2</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#about">About me</a>
+<body>
+  <!-- Background Glows -->
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="#" class="logo">H.E</a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          Open to opportunities
         </div>
-        
-    </li>
-    <li class="nav-item">
-        <a href="#" class="nav-link">project</a>
-    </li>
-    <li class="nav-item">
-        <a href="#" class="nav-link disabled">contact</a>
-    </li>
-</ul>        
-        </nav>
-    </header>
-<main> 
-    <h1>My Name Hamza! </h1>
-    <h2>I'm A GENUIS DEVELOPER </h2>
-    <h4>I'M JUST A BEGINNER LOL HHH</h4> 
-    <section>
-    </section>
-    <audio src="./src/Enregistrement 2026-05-19 161829.mp4"></audio><br>
-    <iframe 
-    width="1200"
-    height="500"
-    src="./src/Capture d'écran 2026-05-04 121737.png" frameborder="0"></iframe><br>
-    <iframe 
-      width="800"
-      height="400"
-    src="./src/Enregistrement 2026-05-19 161829.mp4" frameborder="50"></iframe> <br>
-    <iframe 
-          width="1000"
-          height="1000"
-    src="./src/ScreenShot-2026-5-11_14-1-56.png" frameborder="0"></iframe>
-</main>
-<section>
-    <form action="">
-<h2>Contact me </h2>
-<input type="text" name="Your Name Here" id=""><br>
-<input type="email" name="email" id="">
-    </form>
-</section>
-<footer>
-    <!-- <P>MADE IN MOROCCO 2026</P> -->
-   <a href="http://instagram.com/7amza_el__" target="_blank" rel="my insta here">Instagram</a> <br>
-    <a href="mailto:hamzaelhatimy7@gmail.com"id="about">Email me</a>  <br>
-    <a href="tel:+212609510158">My phone number</a>
-    <address>casablanca, maarif</address>
- </footer>
- <script src="./script.js"></script>
+        <h1>Hi, I'm Hamza<br>Elhatimy</h1>
+        <p class="tagline"><span class="gradient" id="typing-text">Full Stack Developer</span><span style="animation: pulse-dot 1s infinite; color: var(--accent-1);">|</span></p>
+        <p>A passionate beginner full stack developer based in Casablanca, Morocco. I love building things for the web and I'm on a journey to master modern technologies.</p>
+        <div class="hero-buttons">
+          <a href="#contact" class="btn btn-primary">Get In Touch ↗</a>
+          <a href="#projects" class="btn btn-outline">View Projects →</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="avatar-wrapper">
+          <div class="avatar-ring"></div>
+          <img src="avatar.png" alt="Hamza Elhatimy" class="avatar-img">
+          <div class="avatar-float top">⚡ Learning Daily</div>
+          <div class="avatar-float bottom">🇲🇦 Casablanca</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="container">
+      <span class="section-label reveal">// About Me</span>
+      <h2 class="section-title reveal">Building the future,<br><span class="gradient">one line of code at a time.</span></h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p class="reveal">I'm Hamza Elhatimy, a self-driven beginner full stack developer who's passionate about creating elegant and functional web experiences. I'm currently sharpening my skills across both frontend and backend technologies.</p>
+          <p class="reveal">Every day is a new opportunity to learn. From HTML & CSS foundations to JavaScript frameworks and server-side programming, I'm committed to growing as a developer and contributing to meaningful projects.</p>
+          <div class="stats-row reveal">
+            <div class="stat">
+              <div class="number">10+</div>
+              <div class="label">Projects Built</div>
+            </div>
+            <div class="stat">
+              <div class="number">5+</div>
+              <div class="label">Technologies</div>
+            </div>
+            <div class="stat">
+              <div class="number">∞</div>
+              <div class="label">Curiosity</div>
+            </div>
+          </div>
+        </div>
+        <div class="info-cards">
+          <div class="info-card reveal">
+            <div class="icon">📍</div>
+            <div>
+              <div class="info-label">Location</div>
+              <div class="info-value">Casablanca, Maarif</div>
+            </div>
+          </div>
+          <div class="info-card reveal">
+            <div class="icon">🎓</div>
+            <div>
+              <div class="info-label">Status</div>
+              <div class="info-value">Beginner Full Stack Dev</div>
+            </div>
+          </div>
+          <div class="info-card reveal">
+            <div class="icon">🌍</div>
+            <div>
+              <div class="info-label">Languages</div>
+              <div class="info-value">Arabic, French, English</div>
+            </div>
+          </div>
+          <div class="info-card reveal">
+            <div class="icon">🚀</div>
+            <div>
+              <div class="info-label">Goal</div>
+              <div class="info-value">Become a Pro Developer</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills">
+    <div class="container">
+      <span class="section-label reveal">// My Skills</span>
+      <h2 class="section-title reveal">Technologies <span class="gradient">I work with.</span></h2>
+      <p class="section-desc reveal">Here are the tools and technologies I'm learning and using to build web applications.</p>
+      <div class="skills-grid">
+        <div class="skill-card reveal">
+          <div class="skill-icon">🎨</div>
+          <h3>Frontend</h3>
+          <p>Building responsive and interactive user interfaces with modern web technologies.</p>
+          <div class="skill-tags">
+            <span class="skill-tag">HTML5</span>
+            <span class="skill-tag">CSS3</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">React</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-icon">⚙️</div>
+          <h3>Backend</h3>
+          <p>Learning server-side development to build robust and scalable applications.</p>
+          <div class="skill-tags">
+            <span class="skill-tag">Node.js</span>
+            <span class="skill-tag">Express</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">REST APIs</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-icon">🗄️</div>
+          <h3>Database & Tools</h3>
+          <p>Working with databases and essential developer tools for efficient workflows.</p>
+          <div class="skill-tags">
+            <span class="skill-tag">MySQL</span>
+            <span class="skill-tag">MongoDB</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">VS Code</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <div class="container">
+      <span class="section-label reveal">// My Projects</span>
+      <h2 class="section-title reveal">Things I've <span class="gradient">built so far.</span></h2>
+      <p class="section-desc reveal">A collection of projects that showcase my learning journey and growing skills.</p>
+      <div class="projects-grid">
+        <div class="project-card reveal">
+          <div class="project-img" style="background: linear-gradient(135deg, #6c5ce7, #a29bfe);">🌐</div>
+          <div class="project-body">
+            <h3>Personal Portfolio</h3>
+            <p>This very website! A modern, responsive portfolio built from scratch to showcase my work and skills.</p>
+            <div class="project-tech">
+              <span>HTML</span><span>CSS</span><span>JavaScript</span>
+            </div>
+            <div class="project-links">
+              <a href="#">Live Demo ↗</a>
+              <a href="#">Source Code →</a>
+            </div>
+          </div>
+        </div>
+        <div class="project-card reveal">
+          <div class="project-img" style="background: linear-gradient(135deg, #00cec9, #81ecec);">🛍️</div>
+          <div class="project-body">
+            <h3>Product Card UI</h3>
+            <p>A beautifully designed product card component with hover effects and clean layout.</p>
+            <div class="project-tech">
+              <span>HTML</span><span>CSS</span>
+            </div>
+            <div class="project-links">
+              <a href="#">Live Demo ↗</a>
+              <a href="#">Source Code →</a>
+            </div>
+          </div>
+        </div>
+        <div class="project-card reveal">
+          <div class="project-img" style="background: linear-gradient(135deg, #fd79a8, #e84393);">📝</div>
+          <div class="project-body">
+            <h3>Coming Soon...</h3>
+            <p>More exciting projects are in the works. Stay tuned as I continue to build and learn!</p>
+            <div class="project-tech">
+              <span>React</span><span>Node.js</span><span>MongoDB</span>
+            </div>
+            <div class="project-links">
+              <a href="#">In Progress 🚧</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="container">
+      <span class="section-label reveal">// Contact</span>
+      <h2 class="section-title reveal">Let's <span class="gradient">work together.</span></h2>
+      <p class="section-desc reveal">Have a project in mind or just want to connect? I'd love to hear from you.</p>
+      <div class="contact-wrapper">
+        <div class="contact-info">
+          <a href="mailto:hamzaelhatimy7@gmail.com" class="contact-item reveal">
+            <div class="c-icon">✉️</div>
+            <div>
+              <div class="c-label">Email</div>
+              <div class="c-value">hamzaelhatimy7@gmail.com</div>
+            </div>
+          </a>
+          <a href="tel:+212609510158" class="contact-item reveal">
+            <div class="c-icon">📱</div>
+            <div>
+              <div class="c-label">Phone</div>
+              <div class="c-value">+212 609 510 158</div>
+            </div>
+          </a>
+          <a href="http://instagram.com/7amza_el__" target="_blank" class="contact-item reveal">
+            <div class="c-icon">📸</div>
+            <div>
+              <div class="c-label">Instagram</div>
+              <div class="c-value">@7amza_el__</div>
+            </div>
+          </a>
+          <div class="contact-item reveal">
+            <div class="c-icon">📍</div>
+            <div>
+              <div class="c-label">Address</div>
+              <div class="c-value">Casablanca, Maarif</div>
+            </div>
+          </div>
+        </div>
+        <form class="contact-form" id="contact-form">
+          <div class="form-group reveal">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="John Doe" required>
+          </div>
+          <div class="form-group reveal">
+            <label for="email">Your Email</label>
+            <input type="email" id="email" name="email" placeholder="john@example.com" required>
+          </div>
+          <div class="form-group reveal">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell me about your project..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary reveal" id="submit-btn">Send Message ↗</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <p>Made with ❤️ in Morocco — <span class="gradient">Hamza Elhatimy</span> © 2026</p>
+        <div class="social-links">
+          <a href="mailto:hamzaelhatimy7@gmail.com" aria-label="Email">✉️</a>
+          <a href="http://instagram.com/7amza_el__" target="_blank" aria-label="Instagram">📸</a>
+          <a href="tel:+212609510158" aria-label="Phone">📱</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
-
-
 </html>
