@@ -48,24 +48,25 @@
     <div class="hero-grid-pattern"></div>
     <div class="container">
       <div class="hero-content reveal">
-        <div class="hero-badge">
+        <div class="hero-badge shine-effect">
           <span class="dot"></span>
           Available for new opportunities
         </div>
-        <h1>Hi, I'm <span class="gradient">Hamza</span></h1>
-        <p class="tagline">Full Stack Developer</p>
+        <h1 style="font-size: 5.5rem;">Hi, I'm <br><span class="gradient animated-gradient">Hamza</span></h1>
+        <p class="tagline"><span id="typing-text"></span><span class="cursor-blink">|</span></p>
         <p class="desc">I craft scalable, high-performance web applications with a focus on modern design and exceptional user experiences. Based in Casablanca, Morocco.</p>
         <div class="hero-buttons">
-          <a href="#projects" class="btn btn-primary">Explore Work <i data-lucide="arrow-right"></i></a>
+          <a href="#projects" class="btn btn-primary pulse-glow">Explore Work <i data-lucide="arrow-right"></i></a>
           <a href="#contact" class="btn btn-outline">Let's Connect</a>
         </div>
       </div>
       <div class="hero-visual reveal reveal-delay-2">
-        <div class="avatar-wrapper">
+        <div class="avatar-wrapper magnetic">
+          <div class="avatar-conic-border"></div>
           <div class="avatar-bg"></div>
           <img src="avatar.png" alt="Hamza Elhatimy" class="avatar-img">
-          <div class="avatar-float top"><i data-lucide="code-2"></i> Clean Code</div>
-          <div class="avatar-float bottom"><i data-lucide="zap"></i> Fast Performance</div>
+          <div class="avatar-float top enhanced-glass"><i data-lucide="code-2"></i> Clean Code</div>
+          <div class="avatar-float bottom enhanced-glass"><i data-lucide="zap"></i> Fast Performance</div>
         </div>
       </div>
     </div>
@@ -81,10 +82,15 @@
 
       <div class="bento-grid">
         <!-- Main Intro -->
-        <div class="bento-item large glass-card reveal">
-          <i data-lucide="terminal" class="bento-icon"></i>
-          <h3>Engineering the Web</h3>
-          <p>I'm a self-driven full stack developer passionate about creating elegant and functional digital experiences. I thrive on solving complex problems and continuously learning new technologies to build better, faster, and more scalable applications.</p>
+        <div class="bento-item large glass-card reveal" style="position: relative; overflow: hidden;">
+          <div style="position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: center;">
+            <i data-lucide="terminal" class="bento-icon"></i>
+            <h3>Engineering the Web</h3>
+            <p style="max-width: 80%;">I'm a self-driven full stack developer passionate about creating elegant and functional digital experiences. I thrive on solving complex problems and continuously learning new technologies to build better, faster, and more scalable applications.</p>
+          </div>
+          <div style="position: absolute; right: -80px; bottom: -80px; width: 450px; height: 450px; z-index: 1; pointer-events: none; opacity: 0.6;">
+            <canvas id="web-globe-canvas" style="width: 100%; height: 100%;"></canvas>
+          </div>
         </div>
 
         <!-- Location -->
@@ -100,22 +106,7 @@
           <div class="label">Projects</div>
         </div>
 
-        <!-- Tech Stack -->
-        <div class="bento-item wide glass-card reveal reveal-delay-1">
-          <i data-lucide="cpu" class="bento-icon"></i>
-          <h3>Tech Arsenal</h3>
-          <div class="tech-tags">
-            <span class="tech-tag"><img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="JavaScript" class="tech-icon"> JavaScript</span>
-            <span class="tech-tag"><img src="https://cdn.simpleicons.org/react/61DAFB" alt="React" class="tech-icon"> React.js</span>
-            <span class="tech-tag"><img src="https://cdn.simpleicons.org/nodedotjs/5FA04E" alt="Node.js" class="tech-icon"> Node.js</span>
-            <span class="tech-tag"><img src="https://cdn.simpleicons.org/express/white" alt="Express" class="tech-icon"> Express</span>
-            <span class="tech-tag"><img src="https://cdn.simpleicons.org/python/3776AB" alt="Python" class="tech-icon"> Python</span>
-            <span class="tech-tag"><img src="https://cdn.simpleicons.org/mongodb/47A248" alt="MongoDB" class="tech-icon"> MongoDB</span>
-            <span class="tech-tag"><img src="https://cdn.simpleicons.org/mysql/4479A1" alt="MySQL" class="tech-icon"> MySQL</span>
-            <span class="tech-tag"><img src="https://cdn.simpleicons.org/tailwindcss/06B6D4" alt="TailwindCSS" class="tech-icon"> TailwindCSS</span>
-          </div>
-        </div>
-        
+
         <!-- Currently Learning -->
          <div class="bento-item glass-card reveal reveal-delay-2">
             <i data-lucide="book-open" class="bento-icon"></i>
@@ -131,6 +122,67 @@
          </div>
       </div>
     </div>
+  </section>
+
+  <!-- Tech Arsenal Section -->
+  <section id="tech-arsenal">
+    <div style="position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0.6;">
+      <canvas id="tech-arsenal-canvas" style="width: 100%; height: 100%;"></canvas>
+    </div>
+    
+    <div class="container" style="position: relative; z-index: 2;">
+      <div class="section-header reveal">
+        <span class="section-label"><i data-lucide="cpu"></i> Skills</span>
+        <h2 class="section-title">Tech <span class="gradient-2">Arsenal</span></h2>
+        <p class="section-desc">Technologies and tools I use to bring ideas to life.</p>
+      </div>
+    </div>
+
+    <div class="tech-marquee-container reveal reveal-delay-1">
+      <!-- Top Row: Scrolling Left -->
+      <div class="tech-marquee">
+          <div class="marquee-track-left">
+            <!-- Original Set -->
+            <div class="tech-card glass-card"><img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="JavaScript" class="tech-icon-large"><span>JavaScript</span></div>
+            <div class="tech-card glass-card"><img src="https://cdn.simpleicons.org/react/61DAFB" alt="React" class="tech-icon-large"><span>React.js</span></div>
+            <div class="tech-card glass-card"><img src="https://cdn.simpleicons.org/nodedotjs/5FA04E" alt="Node.js" class="tech-icon-large"><span>Node.js</span></div>
+            <div class="tech-card glass-card"><img src="https://cdn.simpleicons.org/express/white" alt="Express" class="tech-icon-large"><span>Express</span></div>
+            <div class="tech-card glass-card"><img src="https://cdn.simpleicons.org/python/3776AB" alt="Python" class="tech-icon-large"><span>Python</span></div>
+            <div class="tech-card glass-card"><img src="https://cdn.simpleicons.org/mongodb/47A248" alt="MongoDB" class="tech-icon-large"><span>MongoDB</span></div>
+            <div class="tech-card glass-card"><img src="https://cdn.simpleicons.org/mysql/4479A1" alt="MySQL" class="tech-icon-large"><span>MySQL</span></div>
+            <!-- Duplicated Set -->
+            <div class="tech-card glass-card"><img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="JavaScript" class="tech-icon-large"><span>JavaScript</span></div>
+            <div class="tech-card glass-card"><img src="https://cdn.simpleicons.org/react/61DAFB" alt="React" class="tech-icon-large"><span>React.js</span></div>
+            <div class="tech-card glass-card"><img src="https://cdn.simpleicons.org/nodedotjs/5FA04E" alt="Node.js" class="tech-icon-large"><span>Node.js</span></div>
+            <div class="tech-card glass-card"><img src="https://cdn.simpleicons.org/express/white" alt="Express" class="tech-icon-large"><span>Express</span></div>
+            <div class="tech-card glass-card"><img src="https://cdn.simpleicons.org/python/3776AB" alt="Python" class="tech-icon-large"><span>Python</span></div>
+            <div class="tech-card glass-card"><img src="https://cdn.simpleicons.org/mongodb/47A248" alt="MongoDB" class="tech-icon-large"><span>MongoDB</span></div>
+            <div class="tech-card glass-card"><img src="https://cdn.simpleicons.org/mysql/4479A1" alt="MySQL" class="tech-icon-large"><span>MySQL</span></div>
+          </div>
+        </div>
+
+        <!-- Bottom Row: Scrolling Right -->
+        <div class="tech-marquee" style="margin-top: 24px;">
+          <div class="marquee-track-right">
+            <!-- Original Set -->
+            <div class="tech-card glass-card"><img src="https://cdn.simpleicons.org/tailwindcss/06B6D4" alt="TailwindCSS" class="tech-icon-large"><span>Tailwind</span></div>
+            <div class="tech-card glass-card"><img src="https://cdn.simpleicons.org/threedotjs/white" alt="Three.js" class="tech-icon-large"><span>Three.js</span></div>
+            <div class="tech-card glass-card"><img src="https://cdn.simpleicons.org/git/F05032" alt="Git" class="tech-icon-large"><span>Git</span></div>
+            <div class="tech-card glass-card"><img src="https://cdn.simpleicons.org/n8n/EA4B71" alt="n8n" class="tech-icon-large"><span>n8n.io</span></div>
+            <div class="tech-card glass-card"><img src="https://cdn.simpleicons.org/anthropic/D97757" alt="Claude Code" class="tech-icon-large"><span>Claude Code</span></div>
+            <div class="tech-card glass-card"><img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="Codex" class="tech-icon-large" style="filter: invert(1) brightness(2);"><span>Codex</span></div>
+            <div class="tech-card glass-card"><img src="https://cdn.simpleicons.org/githubcopilot/white" alt="GitHub Copilot" class="tech-icon-large"><span>Copilot</span></div>
+            <!-- Duplicated Set -->
+            <div class="tech-card glass-card"><img src="https://cdn.simpleicons.org/tailwindcss/06B6D4" alt="TailwindCSS" class="tech-icon-large"><span>Tailwind</span></div>
+            <div class="tech-card glass-card"><img src="https://cdn.simpleicons.org/threedotjs/white" alt="Three.js" class="tech-icon-large"><span>Three.js</span></div>
+            <div class="tech-card glass-card"><img src="https://cdn.simpleicons.org/git/F05032" alt="Git" class="tech-icon-large"><span>Git</span></div>
+            <div class="tech-card glass-card"><img src="https://cdn.simpleicons.org/n8n/EA4B71" alt="n8n" class="tech-icon-large"><span>n8n.io</span></div>
+            <div class="tech-card glass-card"><img src="https://cdn.simpleicons.org/anthropic/D97757" alt="Claude Code" class="tech-icon-large"><span>Claude Code</span></div>
+            <div class="tech-card glass-card"><img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="Codex" class="tech-icon-large" style="filter: invert(1) brightness(2);"><span>Codex</span></div>
+            <div class="tech-card glass-card"><img src="https://cdn.simpleicons.org/githubcopilot/white" alt="GitHub Copilot" class="tech-icon-large"><span>Copilot</span></div>
+          </div>
+        </div>
+      </div>
   </section>
 
   <!-- Projects Section -->
@@ -235,7 +287,7 @@
             <div class="contact-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></div>
             <div class="contact-text">
               <h4>Social</h4>
-              <p>@7amza_el__</p>
+              <p><a href="https://instagram.com/7amza_el__" target="_blank">@7amza_el__</a></p>
             </div>
           </div>
         </div>
@@ -269,14 +321,15 @@
           © 2026 Hamza Elhatimy. Designed & Built with passion.
         </div>
         <div class="footer-socials">
-          <a href="https://github.com" target="_blank" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3-.3 6-1.5 6-6.5a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 5 3 6.2 6 6.5a4.8 4.8 0 0 0-1 3.2v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg></a>
-          <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="https://github.com/ELHATIMY-HAMZA" target="_blank" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3-.3 6-1.5 6-6.5a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 5 3 6.2 6 6.5a4.8 4.8 0 0 0-1 3.2v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg></a>
+          <a href="https://linkedin.com/in/hamza-elhatimy" target="_blank" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="https://instagram.com/7amza_el__" target="_blank" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
           <a href="mailto:hamzaelhatimy7@gmail.com" aria-label="Email"><i data-lucide="mail"></i></a>
         </div>
       </div>
     </div>
   </footer>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="script.js"></script>
   <script>document.addEventListener('DOMContentLoaded', () => { if (typeof lucide !== 'undefined') lucide.createIcons(); });</script>
 </body>

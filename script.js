@@ -1,103 +1,106 @@
-// ===== Particle Canvas Background =====
+// ===== Three.js 3D Background =====
 const canvas = document.getElementById('particle-canvas');
-const ctx = canvas.getContext('2d');
-let particles = [];
-let animationId;
+const scene = new THREE.Scene();
 
-function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+// Camera setup
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
+camera.position.z = 120;
+camera.position.y = 30;
+
+// Renderer setup
+const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+// Create a 3D Particle Wave
+const particleCount = 2500;
+const geometry = new THREE.BufferGeometry();
+const positions = new Float32Array(particleCount * 3);
+const colors = new Float32Array(particleCount * 3);
+
+const color1 = new THREE.Color('#8a2be2'); // accent-1 (purple)
+const color2 = new THREE.Color('#00ffff'); // accent-2 (cyan)
+
+for (let i = 0; i < particleCount; i++) {
+  // Random positions in a wide area
+  const x = (Math.random() - 0.5) * 500;
+  const y = (Math.random() - 0.5) * 150 - 20; 
+  const z = (Math.random() - 0.5) * 500;
+  
+  positions[i * 3] = x;
+  positions[i * 3 + 1] = y;
+  positions[i * 3 + 2] = z;
+  
+  // Mix colors based on position
+  const mixedColor = color1.clone().lerp(color2, Math.random());
+  colors[i * 3] = mixedColor.r;
+  colors[i * 3 + 1] = mixedColor.g;
+  colors[i * 3 + 2] = mixedColor.b;
 }
 
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
+geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
-class Particle {
-  constructor() {
-    this.reset();
-  }
+const material = new THREE.PointsMaterial({
+  size: 2,
+  vertexColors: true,
+  transparent: true,
+  opacity: 0.8,
+  sizeAttenuation: true
+});
 
-  reset() {
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
-    this.size = Math.random() * 1.5 + 0.5;
-    this.speedX = (Math.random() - 0.5) * 0.4;
-    this.speedY = (Math.random() - 0.5) * 0.4;
-    this.opacity = Math.random() * 0.4 + 0.1;
-    this.fadeDirection = Math.random() > 0.5 ? 1 : -1;
-  }
+const particles = new THREE.Points(geometry, material);
+scene.add(particles);
 
-  update() {
-    this.x += this.speedX;
-    this.y += this.speedY;
-    this.opacity += this.fadeDirection * 0.002;
+// Mouse interaction
+let mouseX = 0;
+let mouseY = 0;
+let targetX = 0;
+let targetY = 0;
 
-    if (this.opacity <= 0.05 || this.opacity >= 0.5) {
-      this.fadeDirection *= -1;
-    }
+const windowHalfX = window.innerWidth / 2;
+const windowHalfY = window.innerHeight / 2;
 
-    if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
-      this.reset();
-    }
-  }
+document.addEventListener('mousemove', (event) => {
+  mouseX = (event.clientX - windowHalfX);
+  mouseY = (event.clientY - windowHalfY);
+});
 
-  draw() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(124, 108, 240, ${this.opacity})`;
-    ctx.fill();
-  }
-}
-
-function initParticles() {
-  const count = Math.min(Math.floor((canvas.width * canvas.height) / 15000), 80);
-  particles = [];
-  for (let i = 0; i < count; i++) {
-    particles.push(new Particle());
-  }
-}
-
-function connectParticles() {
-  const maxDist = 120;
-  for (let i = 0; i < particles.length; i++) {
-    for (let j = i + 1; j < particles.length; j++) {
-      const dx = particles[i].x - particles[j].x;
-      const dy = particles[i].y - particles[j].y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < maxDist) {
-        const opacity = (1 - dist / maxDist) * 0.15;
-        ctx.beginPath();
-        ctx.strokeStyle = `rgba(124, 108, 240, ${opacity})`;
-        ctx.lineWidth = 0.5;
-        ctx.moveTo(particles[i].x, particles[i].y);
-        ctx.lineTo(particles[j].x, particles[j].y);
-        ctx.stroke();
-      }
-    }
-  }
-}
+// Animation loop
+const clock = new THREE.Clock();
 
 function animateParticles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  particles.forEach(p => {
-    p.update();
-    p.draw();
-  });
-  connectParticles();
-  animationId = requestAnimationFrame(animateParticles);
+  requestAnimationFrame(animateParticles);
+  const elapsedTime = clock.getElapsedTime();
+  
+  // Smoothly move particles object
+  particles.rotation.y = elapsedTime * 0.05;
+  
+  // Wave effect
+  const positionsArray = particles.geometry.attributes.position.array;
+  for(let i = 0; i < particleCount; i++) {
+    const i3 = i * 3;
+    const x = positionsArray[i3];
+    const z = positionsArray[i3 + 2];
+    positionsArray[i3 + 1] = Math.sin(elapsedTime * 0.5 + x * 0.02) * 15 + Math.cos(elapsedTime * 0.5 + z * 0.02) * 15 - 20;
+  }
+  particles.geometry.attributes.position.needsUpdate = true;
+  
+  // Camera parallax
+  camera.position.x += (mouseX * 0.1 - camera.position.x) * 0.02;
+  camera.position.y += (-mouseY * 0.1 - camera.position.y + 30) * 0.02;
+  camera.lookAt(scene.position);
+  
+  renderer.render(scene, camera);
 }
 
-initParticles();
 animateParticles();
 
-// Re-init on resize
-let resizeTimer;
+// Handle resize
 window.addEventListener('resize', () => {
-  clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(() => {
-    resizeCanvas();
-    initParticles();
-  }, 200);
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
 // ===== Cursor Spotlight =====
@@ -190,6 +193,21 @@ function typeEffect() {
 }
 
 typeEffect();
+
+// ===== Magnetic effect =====
+const magneticElements = document.querySelectorAll('.magnetic');
+magneticElements.forEach((el) => {
+  el.addEventListener('mousemove', (e) => {
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    el.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px) scale(1.05)`;
+  });
+  el.addEventListener('mouseleave', () => {
+    // Reset to initial transform or blank
+    el.style.transform = '';
+  });
+});
 
 // ===== Active nav link on scroll (pill style) =====
 const sections = document.querySelectorAll('section[id]');
@@ -331,3 +349,129 @@ window.addEventListener('scroll', () => {
 backToTop.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
+
+// ===== Three.js Tech Arsenal Background =====
+const techArsenalCanvas = document.getElementById('tech-arsenal-canvas');
+if (techArsenalCanvas) {
+  const taScene = new THREE.Scene();
+  const taCamera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+  taCamera.position.z = 200;
+
+  const taRenderer = new THREE.WebGLRenderer({ canvas: techArsenalCanvas, alpha: true, antialias: true });
+  taRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  
+  // Particles for Tech Arsenal
+  const taParticles = new THREE.BufferGeometry();
+  const taParticleCount = 400;
+  
+  const taPositions = new Float32Array(taParticleCount * 3);
+  for(let i=0; i<taParticleCount; i++) {
+    taPositions[i*3] = (Math.random() - 0.5) * 800;
+    taPositions[i*3+1] = (Math.random() - 0.5) * 800;
+    taPositions[i*3+2] = (Math.random() - 0.5) * 800;
+  }
+  
+  taParticles.setAttribute('position', new THREE.BufferAttribute(taPositions, 3));
+  
+  const taMaterial = new THREE.PointsMaterial({
+    color: 0x00ffff,
+    size: 2.5,
+    transparent: true,
+    opacity: 0.6
+  });
+  
+  const taPoints = new THREE.Points(taParticles, taMaterial);
+  taScene.add(taPoints);
+  
+  // Add a wireframe icosahedron
+  const tkGeo = new THREE.IcosahedronGeometry(100, 1);
+  const tkMat = new THREE.MeshBasicMaterial({ color: 0x8a2be2, wireframe: true, transparent: true, opacity: 0.1 });
+  const tkMesh = new THREE.Mesh(tkGeo, tkMat);
+  taScene.add(tkMesh);
+
+  const taClock = new THREE.Clock();
+  
+  function animateTA() {
+    requestAnimationFrame(animateTA);
+    const elapsedTime = taClock.getElapsedTime();
+    
+    taPoints.rotation.x = elapsedTime * 0.03;
+    taPoints.rotation.y = elapsedTime * 0.05;
+    
+    tkMesh.rotation.x = elapsedTime * 0.1;
+    tkMesh.rotation.y = elapsedTime * 0.15;
+    
+    taRenderer.render(taScene, taCamera);
+  }
+  
+  animateTA();
+  
+  window.addEventListener('resize', () => {
+    if(techArsenalCanvas) {
+      const parent = techArsenalCanvas.parentElement;
+      if (parent) {
+        const width = parent.clientWidth || window.innerWidth;
+        const height = parent.clientHeight || window.innerHeight;
+        taCamera.aspect = width / height;
+        taCamera.updateProjectionMatrix();
+        taRenderer.setSize(width, height);
+      }
+    }
+  });
+  
+  // Trigger initial resize after a small delay to ensure DOM is ready
+  setTimeout(() => window.dispatchEvent(new Event('resize')), 100);
+}
+
+// ===== Three.js Web Globe Artifact =====
+const globeCanvas = document.getElementById('web-globe-canvas');
+if (globeCanvas) {
+  const globeScene = new THREE.Scene();
+  const globeCamera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
+  globeCamera.position.z = 400;
+
+  const globeRenderer = new THREE.WebGLRenderer({ canvas: globeCanvas, alpha: true, antialias: true });
+  globeRenderer.setSize(450, 450);
+  globeRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  // Create a Geodesic Sphere for the "Web" look
+  const sphereGeo = new THREE.IcosahedronGeometry(160, 2);
+  
+  // Wireframe Globe
+  const wireframeMat = new THREE.MeshBasicMaterial({
+    color: 0x8a2be2,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.15
+  });
+  const wireframeGlobe = new THREE.Mesh(sphereGeo, wireframeMat);
+  globeScene.add(wireframeGlobe);
+
+  // Points on the Globe
+  const particleMat = new THREE.PointsMaterial({
+    color: 0x00ffff,
+    size: 4,
+    transparent: true,
+    opacity: 0.8
+  });
+  const pointsGlobe = new THREE.Points(sphereGeo, particleMat);
+  globeScene.add(pointsGlobe);
+
+  const globeClock = new THREE.Clock();
+
+  function animateGlobe() {
+    requestAnimationFrame(animateGlobe);
+    const elapsedTime = globeClock.getElapsedTime();
+
+    // Slow, elegant rotation
+    wireframeGlobe.rotation.y = elapsedTime * 0.08;
+    wireframeGlobe.rotation.x = elapsedTime * 0.04;
+
+    pointsGlobe.rotation.y = elapsedTime * 0.08;
+    pointsGlobe.rotation.x = elapsedTime * 0.04;
+
+    globeRenderer.render(globeScene, globeCamera);
+  }
+
+  animateGlobe();
+}
